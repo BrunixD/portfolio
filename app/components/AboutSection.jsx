@@ -34,19 +34,22 @@ export default function AboutSection() {
   return (
     <section ref={sectionRef} id="about" className={styles.aboutContainer}>
       <div className={styles.logEntry}>
-        <h2 className={styles.logTitle}>Captain's Log</h2>
+        <h2 className={styles.logTitle}>Captain's Log, Stardate 2025</h2>
         <p>
-          Stardate 77895.2. After navigating the nebulas of client-side frameworks and the asteroid fields of asynchronous JavaScript, my mission remains clear: to explore strange new web technologies, to seek out new life in user experiences, and to boldly code what no one has coded before.
+          After years of navigating the vast cosmos of technology, I’ve charted my own course as a Fullstack Engineer with over 2.5 years of professional experience. My mission: to create intuitive, high-performing digital systems that feel as seamless as space travel itself.
         </p>
         <p>
-          With a passion for clean, efficient code and a love for creating beautiful, intuitive interfaces, I steer projects from concept to deployment. My primary vessel is the starship 'React', powered by a Next.js warp core, but I'm fluent in many galactic tongues including Python, SQL, and CSS.
+          I’m passionate about crafting fluid user experiences and architecting scalable fullstack solutions that balance design precision with backend strength. Whether I’m navigating the front-end nebulae with React and Next.js or fueling backend propulsion through Laravel, Node.js, or Django, I see every challenge as a new constellation to map.
+        </p>
+         <p>
+          Each project I undertake adds a new star to my professional galaxy — a testament to curiosity, growth, and creativity. Technology isn’t just my craft; it’s my universe, where every line of code pushes the frontier of what’s possible.
         </p>
       </div>
       <div className={styles.crewIdCard}>
         <Image 
           src="/profile-pic.jpg" 
           alt="Bruno Carvalho, Mission Commander"
-          width={250}
+          width={180}
           height={250}
           className={styles.crewPhoto}
         />

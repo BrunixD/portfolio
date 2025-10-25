@@ -38,7 +38,7 @@
 }
 
 .crewPhoto {
-  border-radius: 50%;
+  border-radius: 10%;
   border: 4px solid #00aaff;
   margin-bottom: 1rem;
 }

@@ -5,8 +5,15 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import styles from '../styles/SkillsSection.module.css';
 
-import { FaReact, FaNodeJs, FaDatabase, FaGitAlt } from 'react-icons/fa';
-import { SiJavascript, SiNextdotjs, SiPostgresql, SiCss3 } from 'react-icons/si';
+import { 
+  FaReact, FaHtml5, FaCss3Alt, FaNodeJs, FaPython, FaPhp, 
+  FaLaravel, FaJava, FaDatabase, FaGitAlt, FaGithub, 
+} from 'react-icons/fa';
+
+import { 
+  SiJavascript, SiNextdotjs, SiTailwindcss, SiFramer, SiExpress, 
+  SiDjango, SiMongodb, SiCloudflare, SiFirebase, SiVercel 
+} from 'react-icons/si';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,30 +21,43 @@ const skillsData = {
   navigation: {
     title: 'Navigation (Frontend)',
     skills: [
-      { name: 'JavaScript (ES6+)', icon: <SiJavascript /> },
+      { name: 'JavaScript', icon: <SiJavascript /> },
       { name: 'React', icon: <FaReact /> },
       { name: 'Next.js', icon: <SiNextdotjs /> },
-      { name: 'CSS3 & Modules', icon: <SiCss3 /> },
+      { name: 'HTML5', icon: <FaHtml5 /> }, 
+      { name: 'CSS3', icon: <FaCss3Alt /> },
+      { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
+      { name: 'Framer Motion', icon: <SiFramer /> },
     ],
   },
   propulsion: {
     title: 'Propulsion (Backend)',
     skills: [
       { name: 'Node.js', icon: <FaNodeJs /> },
-      { name: 'Express.js', icon: <FaNodeJs /> }, // Using Node icon as placeholder
+      { name: 'Express', icon: <SiExpress /> },
+      { name: 'Python', icon: <FaPython /> },
+      { name: 'Django', icon: <SiDjango /> },
+      { name: 'PHP', icon: <FaPhp /> },
+      { name: 'Laravel', icon: <FaLaravel /> },
+      { name: 'Java', icon: <FaJava /> },
     ],
   },
   lifeSupport: {
     title: 'Life Support (Databases)',
     skills: [
-      { name: 'PostgreSQL', icon: <SiPostgresql /> },
       { name: 'SQL', icon: <FaDatabase /> },
+      { name: 'MongoDB', icon: <SiMongodb /> },
+      { name: 'Cloudflare D1', icon: <SiCloudflare /> },
+      { name: 'Firebase', icon: <SiFirebase /> },
     ],
   },
   command: {
-    title: 'Command & Control (Tools)',
+    title: 'Command & Control (Tools & DevOps)',
     skills: [
-      { name: 'Git & GitHub', icon: <FaGitAlt /> },
+      { name: 'Git', icon: <FaGitAlt /> },
+      { name: 'GitHub', icon: <FaGithub /> },
+      { name: 'Vercel', icon: <SiVercel /> },
+      { name: 'Cloudflare', icon: <SiCloudflare /> },,
     ],
   },
 };

@@ -13,42 +13,39 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   { 
     id: 'planet1', 
-    name: 'E-Commerce Nebula', 
+    name: 'Espaço Civil', 
     color: '#8aefff',
-    imageUrl: '/project-ecommerce.jpg',
+    imageUrl: '/projects/logo-EspaçoCivil.jpg',
     surfaceTextureUrl: '/textures/Icy.png',
     cloudsTextureUrl: '/textures/Clouds/Clouds1.png', 
-    // ... rest of the project data
-    description: 'A full-featured e-commerce platform...',
-    tech: ['Next.js', 'React', 'Stripe', 'PostgreSQL'],
+    description: 'A professional digital presence built for a civil engineering company to showcase its expertise and portfolio. I designed and developed a responsive, clean interface that mirrors the precision and stability of engineering itself. Built with React, Next.js, and Tailwind CSS, the website emphasizes clarity, speed, and modern architecture.',
+    tech: ['React', 'Next.js', 'Tailwind CSS'],
     githubUrl: 'https://github.com',
     liveUrl: 'https://github.com'
   },
   { 
     id: 'planet2', 
-    name: 'Data Viz Asteroid Belt', 
-    color: '#ff8a8a',
+    name: 'Cloud Adoption Decision Support System', 
+    color: '#D891EF',
     imageUrl: '/project-dataviz.jpg',
     surfaceTextureUrl: '/textures/Martian.png',
     cloudsTextureUrl: '/textures/Clouds/Clouds2.png',
-    // ... rest of the project data
-    description: 'An interactive data visualization dashboard...',
-    tech: ['React', 'D3.js', 'Node.js'],
+    description: 'A comprehensive decision support tool developed for SMEs to assess their readiness for cloud computing adoption. Built as part of an academic research project, the system uses a weighted scoring model to evaluate service types, deployment models, and organizational factors. I designed the front-end logic in React, integrated dynamic condition handling with JSON Logic, and structured storage using Cloudflare D1.',
+    tech: ['React', 'Tailwind CSS', 'Cloudflare D1', 'JSON Logic', 'Cloudflare Workers', 'Cloudflare Pages', 'Resend'],
     githubUrl: 'https://github.com',
-    liveUrl: 'https://github.com'
+    liveUrl: 'https://brunomsc.com'
   },
   { 
     id: 'planet3', 
-    name: 'Social Media Galaxy', 
+    name: 'Yellow Avocado IT Website', 
     color: '#ffdb8a',
-    imageUrl: '/project-social.jpg',
+    imageUrl: '/projects/yellowavocado.png',
     surfaceTextureUrl: '/textures/Gaseous2.png',
     cloudsTextureUrl: '/textures/Clouds/Clouds3.png',
-    // ... rest of the project data
-    description: 'A full-stack social media application...',
-    tech: ['React', 'Node.js', 'MongoDB'],
+    description: 'A sleek, high-performance website developed for an IT solutions company, designed to convey innovation and professionalism. I implemented the structure, front-end, and UI interactions to ensure a smooth user experience and responsive layout. Using React, Next.js, and Tailwind CSS, this project combines speed, style, and scalability into a polished digital presence.',
+    tech: ['React', 'Next.js', 'Tailwind CSS'],
     githubUrl: 'https://github.com',
-    liveUrl: 'https://github.com'
+    liveUrl: 'https://yellowavocado.com'
   },
 ];
 
