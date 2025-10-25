@@ -1,21 +1,20 @@
 // app/layout.js
 import { Inter } from 'next/font/google';
 import './styles/globals.css';
-import Header from './components/Header'; // Import the header
+import Header from './components/Header';
+import Footer from './components/Footer'; // Import the footer
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
-  title: 'Bruno Carvalho | FullStack Developer',
-  description: 'The portfolio and mission log of a passionate developer navigating the universe of code.',
-};
+export const metadata = { /* ... */ };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header /> {/* Add the Header here */}
-        {children}
+        <Header />
+        <main>{children}</main> {/* Good practice to wrap content in a <main> tag */}
+        <Footer />
       </body>
     </html>
   );

@@ -53,3 +53,10 @@
   color: #c0c0c0;
   margin: 0;
 }
+
+@media (max-width: 900px) {
+  .aboutContainer {
+    flex-direction: column; /* Stack the items vertically */
+    text-align: center; /* Center-align the text for a better look */
+  }
+}
