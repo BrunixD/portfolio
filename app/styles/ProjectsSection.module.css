@@ -13,7 +13,18 @@
   flex-wrap: nowrap;
 }
 
-.introPlanet,
+.introPlanet {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
 .projectPlanet {
   width: 100vw;
   height: 100vh;
@@ -24,6 +35,12 @@
   color: white;
   text-align: center;
   padding: 2rem;
+  cursor: pointer; /* ** Indicates the element is clickable ** */
+  transition: transform 0.3s ease;
+}
+
+.projectPlanet:hover {
+  transform: scale(1.02); /* ** Subtle zoom effect on hover ** */
 }
 
 .introPlanet h2 {
@@ -36,36 +53,52 @@
   height: 300px;
   border-radius: 50%;
   margin-bottom: 2rem;
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.2), inset 0 0 40px rgba(0,0,0,0.5);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  /* ** Style to show the project image inside the circle ** */
+  background-size: cover;
+  background-position: center;
+  background-color: #10182c; /* Fallback color */
+}
+
+.ctaText {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.projectPlanet:hover .ctaText {
+  background-color: #00aaff;
+  border-color: #00aaff;
+  color: #0a0e1c;
 }
 
 /* --- RESPONSIVE STYLES for MOBILE --- */
 @media (max-width: 768px) {
-  /* On mobile, the container just takes up as much space as its content needs */
   .projectsContainer {
     height: auto;
   }
 
-  /* The wrapper becomes a standard vertical flex container */
   .projectsWrapper {
     height: auto;
-    width: 100%; /* Full width of the parent */
-    flex-direction: column; /* Stack the items vertically */
+    width: 100%;
+    flex-direction: column;
   }
 
-  /* Each project section takes up the full screen height for a nice "snap" feel */
   .introPlanet,
   .projectPlanet {
     height: 100vh;
-    width: 100%; /* Full width */
+    width: 100%;
   }
   
   .introPlanet h2 {
-    font-size: 3rem; /* Adjust font size for smaller screens */
+    font-size: 3rem;
   }
 
   .planetVisual {
-    width: 200px; /* Make the planet smaller on mobile */
+    width: 200px;
     height: 200px;
   }
 }

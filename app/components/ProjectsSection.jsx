@@ -11,41 +11,60 @@ import styles from '../styles/ProjectsSection.module.css';
 // Register the ScrollTrigger plugin with GSAP
 gsap.registerPlugin(ScrollTrigger);
 
-// Your project data
+// ** DETAILED PROJECT DATA **
+// This array now contains all the information needed for the modal.
+// Remember to create these image files in your `/public` folder.
 const projects = [
-  { id: 'planet1', name: 'Project Alpha', color: '#ff6b6b' },
-  { id: 'planet2', name: 'Project Beta', color: '#4ecdc4' },
-  { id: 'planet3', name: 'Project Gamma', color: '#feca57' },
+  { 
+    id: 'planet1', 
+    name: 'E-Commerce Nebula', 
+    color: '#ff6b6b',
+    imageUrl: '/project-ecommerce.jpg',
+    description: 'A full-featured e-commerce platform built with Next.js and Stripe, designed for high performance and a seamless user experience. Users can browse products, manage their cart, and complete secure checkouts.',
+    tech: ['Next.js', 'React', 'Stripe', 'PostgreSQL', 'Tailwind CSS', 'GSAP'],
+    githubUrl: 'https://github.com/your-username/your-repo',
+    liveUrl: 'https://your-live-site.com'
+  },
+  { 
+    id: 'planet2', 
+    name: 'Data Viz Asteroid Belt', 
+    color: '#4ecdc4',
+    imageUrl: '/project-dataviz.jpg',
+    description: 'An interactive data visualization dashboard that tracks real-time metrics. Built with D3.js and React, it provides complex data in an intuitive and visually appealing format.',
+    tech: ['React', 'D3.js', 'Node.js', 'WebSocket'],
+    githubUrl: 'https://github.com/your-username/your-repo',
+    liveUrl: 'https://your-live-site.com'
+  },
+  { 
+    id: 'planet3', 
+    name: 'Social Media Galaxy', 
+    color: '#feca57',
+    imageUrl: '/project-social.jpg',
+    description: 'A full-stack social media application where users can create profiles, make posts, and interact with other users. Features a robust backend with authentication and a real-time feed.',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
+    githubUrl: 'https://github.com/your-username/your-repo',
+    liveUrl: 'https://your-live-site.com'
+  },
 ];
 
-export default function ProjectsSection() {
+// The component now accepts the `onProjectClick` function as a prop
+export default function ProjectsSection({ onProjectClick }) {
   const sectionRef = useRef(null);
   const wrapperRef = useRef(null); // A ref for the horizontal wrapper
 
   useLayoutEffect(() => {
-    // Create a GSAP context for safe cleanup
     let ctx = gsap.context(() => {
-      
-      // The new, recommended gsap.matchMedia() method
       gsap.matchMedia().add({
-        // --- DESKTOP SETUP (screens wider than 768px) ---
         isDesktop: "(min-width: 769px)",
-
-        // --- MOBILE SETUP (screens 768px or less) ---
         isMobile: "(max-width: 768px)",
-      }, 
-      (context) => {
-        // The context object contains the matching conditions, like context.conditions.isDesktop
+      }, (context) => {
         let { isDesktop, isMobile } = context.conditions;
 
         if (isDesktop) {
-          // --- DESKTOP-ONLY ANIMATION ---
           const horizontalWrapper = wrapperRef.current;
           if (!horizontalWrapper) return;
-          
           const horizontalScrollLength = horizontalWrapper.offsetWidth - window.innerWidth;
 
-          // The main horizontal scroll animation
           gsap.to(horizontalWrapper, {
             x: -horizontalScrollLength,
             ease: 'none',
@@ -61,11 +80,7 @@ export default function ProjectsSection() {
         }
 
         if (isMobile) {
-          // --- MOBILE-ONLY ANIMATION ---
-          // Here, we create a simple vertical fade-in for each project "planet".
-          // The CSS handles the vertical layout.
           const projectPanels = gsap.utils.toArray(`.${styles.projectPlanet}, .${styles.introPlanet}`);
-          
           projectPanels.forEach(panel => {
             gsap.from(panel, {
               opacity: 0,
@@ -74,33 +89,32 @@ export default function ProjectsSection() {
                 trigger: panel,
                 start: 'top 85%',
                 end: 'bottom 60%',
-                toggleActions: 'play none none reverse', // Fades in on enter, out on scroll up
+                toggleActions: 'play none none reverse',
               }
             });
           });
         }
+      });
+    }, sectionRef);
 
-      }); // end of gsap.matchMedia()
-
-    }, sectionRef); // Scope the context to our component's root element
-
-    // Cleanup function
-    return () => ctx.revert(); 
+    return () => ctx.revert();
   }, []);
 
   return (
     <section ref={sectionRef} className={styles.projectsContainer}>
-      {/* We add the ref to the wrapper directly now */}
       <div ref={wrapperRef} className={styles.projectsWrapper}>
         <div className={styles.introPlanet}>
           <h2>My Work</h2>
           <p>Each project is a world I've helped build. Explore them.</p>
         </div>
         {projects.map((project) => (
-          <div key={project.id} className={styles.projectPlanet}>
-            <div className={styles.planetVisual} style={{ backgroundColor: project.color }}></div>
+          // ** CLICK HANDLER **
+          // When this div is clicked, it calls the function passed down from the parent,
+          // sending its own project data up.
+          <div key={project.id} className={styles.projectPlanet} onClick={() => onProjectClick(project)}>
+            <div className={styles.planetVisual} style={{ backgroundImage: `url(${project.imageUrl})` }}></div>
             <h2>{project.name}</h2>
-            <p>Click to explore this project's details.</p>
+            <p className={styles.ctaText}>Click to View Details</p>
           </div>
         ))}
       </div>
