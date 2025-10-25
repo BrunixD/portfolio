@@ -1,113 +1,50 @@
 'use client';
 
-import { useEffect, useRef, useState, useMemo } from 'react';
-import { gsap } from 'gsap';
+import { useEffect } from 'react';
+import { useLoading } from '../context/LoadingContext'; // Import the loading context hook
 import styles from '../styles/HeroBanner.module.css';
-
-// Correct imports from the new scoped packages
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim"; 
-import ThreeScene from './ThreeScene';
+import ThreeScene from './ThreeScene'; // The component containing your 3D canvas
 
 export default function HeroBanner() {
-  const [init, setInit] = useState(false);
-  const heroRef = useRef(null);
-  const layer1Ref = useRef(null); // Stars far away
-  const layer2Ref = useRef(null); // Closer elements (e.g., a planet)
+  const { setLoading } = useLoading(); // Get the function to update the global loading state
+  //const { playClick } = useSound();   // Get the sound function
 
-  // This useEffect initializes the tsParticles engine
+  // This effect is the key to the preloader system.
+  // It runs once after this component has successfully mounted to the DOM.
+  // Because this is the first and heaviest component, we use it to signal the end of the initial loading phase.
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      // The key is loading the preset bundle here. `loadSlim` is a lightweight bundle.
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
-  }, []);
+    // A small delay can sometimes help ensure the first paint of the 3D canvas has occurred
+    const timer = setTimeout(() => {
+      setLoading(false); // Tell the context: "The hero is ready, hide the preloader."
+    }, 100); // 100ms delay, can be adjusted or removed
 
-  // Parallax effect on mouse move
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!heroRef.current) return;
-      const { clientX, clientY } = e;
-      const { offsetWidth, offsetHeight } = heroRef.current;
-      const xPos = (clientX / offsetWidth - 0.5) * 40; // Intensity multiplier
-      const yPos = (clientY / offsetHeight - 0.5) * 40;
-      
-      gsap.to(layer1Ref.current, { x: -xPos / 2, y: -yPos / 2, duration: 0.5, ease: 'power1.out' });
-      gsap.to(layer2Ref.current, { x: -xPos, y: -yPos, duration: 0.5, ease: 'power1.out' });
-    };
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, [setLoading]); // The dependency array ensures this runs only once
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-  
-  // Typed.js style animation for the title
-  useEffect(() => {
-    // We only animate once the component is mounted and ready
-    gsap.fromTo(`.${styles.holographicText} .char`, 
-      { opacity: 0, y: 20 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        stagger: 0.05, // Each character animates 0.05s after the previous one
-        duration: 0.5,
-        ease: 'power2.out'
-      }
-    );
-  }, []);
-
-  
-  // Particle options
-  const particlesOptions = useMemo(() => ({
-      background: { color: { value: '#0a0e1c' } },
-    fpsLimit: 120,
-    particles: {
-      number: { value: 150, density: { enable: true, value_area: 800 } },
-      color: { value: '#ffffff' },
-      shape: { type: 'circle' },
-      opacity: { value: 0.5, random: true },
-      size: { value: 1, random: true },
-      move: {
-        enable: true,
-        speed: 0.2,
-        direction: 'none',
-        out_mode: 'out',
-      },
-    },
-    interactivity: {
-      events: {
-        onhover: { enable: true, mode: 'bubble' },
-      },
-      modes: {
-        bubble: { distance: 200, size: 3, duration: 2, opacity: 1 },
-      },
-    },
-    detectRetina: true,
-  }), []);
-  
-  // Split the title into characters for the animation
-  const title = "Bruno Carvalho".split("").map((char, index) => (
-    <span key={index} className={styles.char}>{char === ' ' ? '\u00A0' : char}</span>
-  ));
-
-  if (!init) {
-    return null; // Don't render anything until the particles engine is ready
-  }
 
   return (
-      <section className={styles.heroContainer}>
-      {/* The Three.js scene is now the background */}
+    <section className={styles.heroContainer}>
+      
+      {/* Container for the 3D background */}
       <div className={styles.threeBackground}>
         <ThreeScene />
       </div>
       
-      {/* Your text content and button remain the same */}
+      {/* Container for the text content, layered on top of the 3D scene */}
       <div className={styles.heroContent}>
-        <h1 className={styles.holographicText}>Bruno Carvalho</h1>
-        <p className={styles.holographicSubText }>Fullstack Engineer & Interstellar Navigator</p>
-        <a href="#projects" className={styles.ctaButton}>Begin Exploration</a>
+        <h1>Bruno Carvalho</h1>
+        <p>Fullstack Engineer & Interstellar Navigator</p>
+        
+        {/* The call-to-action button */}
+        <a 
+          href="#projects" 
+          className={styles.ctaButton} 
+          //onClick={playClick}
+        >
+          Begin Exploration
+        </a>
       </div>
+
     </section>
   );
 }

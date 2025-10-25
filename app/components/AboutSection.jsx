@@ -46,13 +46,13 @@ export default function AboutSection() {
       <div className={styles.crewIdCard}>
         <Image 
           src="/profile-pic.jpg" // Add your professional photo here in the `public` folder
-          alt="Alex Doe, Mission Commander"
+          alt="Bruno Carvalho, Mission Commander"
           width={250}
           height={250}
           className={styles.crewPhoto}
         />
         <div className={styles.idDetails}>
-          <h3>Alex Doe</h3>
+          <h3>Bruno Carvalho</h3>
           <p>Mission Commander / Full-Stack Developer</p>
         </div>
       </div>

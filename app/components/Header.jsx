@@ -36,7 +36,7 @@ export default function Header() {
     <>
       <header ref={headerRef} className={styles.header}>
         <div className={styles.logo}>
-          <a href="#">Alex Doe</a>
+          <a href="#">Bruno Carvalho</a>
         </div>
 
         <nav className={styles.desktopNav}>

@@ -1,81 +1,61 @@
+/* This is the main full-screen container for the hero section */
 .heroContainer {
   height: 100vh;
-  position: relative;
+  position: relative; /* This is the anchor for absolutely positioned children */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   color: white;
   text-align: center;
-  background-color: #0a0e1c; /* A solid background is important */
+  background-color: #0a0e1c; /* A solid background is crucial as a fallback */
 }
 
-/* This container will hold our 3D canvas */
+/* This container will hold our 3D canvas and stretch it to fill the hero section */
 .threeBackground {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0; /* Places it behind the content */
+  z-index: 1; /* Places the 3D scene on a base layer */
 }
 
-/* Ensure the text content is on top */
+/* This container holds the text and button, ensuring it's on top of the 3D scene */
 .heroContent {
-  position: relative;
-  z-index: 1;
+  position: relative; /* Positioned relative to its normal flow */
+  z-index: 2;         /* A higher z-index places it on top of the background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem; /* Adds some space between the text elements */
 }
 
-
-@keyframes glitch {
-  0% { transform: translate(0); }
-  25% { transform: translate(2px, -2px); }
-  50% { transform: translate(-2px, 2px); }
-  75% { transform: translate(2px, 2px); }
-  100% { transform: translate(-2px, -2px); }
-}
-
-/* Add your background images here */
-.layer1 {
-  background-image: url('/stars-far.png');
-}
-.layer2 {
-  background-image: url('/planet.png');
-  background-size: contain; /* Maybe 'contain' is better for the planet */
-  background-repeat: no-repeat;
-}
-
-
-.holographicText {
-  font-size: 5rem;
-  font-weight: bold;
+.heroContent h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem); /* Responsive font size */
+  font-weight: 700;
+  letter-spacing: 2px;
   color: #fff;
-  text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff, 0 0 40px #00aaff;
-  /* Remove the glitch animation; we'll use a smoother GSAP one now */
+  margin: 0;
+  text-shadow: 
+    0 0 10px rgba(0, 170, 255, 0.8), 
+    0 0 20px rgba(0, 170, 255, 0.6), 
+    0 0 40px rgba(0, 170, 255, 0.4);
 }
 
-.holographicSubText {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff, 0 0 40px #00aaff;
-  /* Remove the glitch animation; we'll use a smoother GSAP one now */
+.heroContent p {
+  font-size: clamp(1rem, 3vw, 1.25rem); /* Responsive font size */
+  color: #c0c0c0;
+  margin: 0;
+  letter-spacing: 1px;
 }
 
-.holographicText .char {
-  display: inline-block; /* Required for transform animations */
-}
-
-/* ==========================================================================
-   CTA Button Styles (Corrected)
-   ========================================================================== */
+/* --- Styles for the CTA Button --- */
 
 .ctaButton {
-  /* --- CRITICAL FIXES --- */
-  display: inline-block; /* Ensures the <a> tag behaves like a block, respecting overflow */
-  overflow: hidden;      /* This now works correctly, hiding the ::before element */
-
-  /* --- Base Styling & Typography --- */
+  display: inline-block;
+  overflow: hidden;
   background: transparent;
   border: 2px solid #00aaff;
   color: #00aaff;
@@ -87,14 +67,11 @@
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  
-  /* --- Setup for Animations --- */
-  position: relative; /* Crucial for the pseudo-element positioning */
+  position: relative;
   transition: all 0.4s ease-in-out;
+  margin-top: 1rem; /* Adds some space above the button */
 }
 
-/* --- The "Energy Fill" Pseudo-Element --- */
-/* This is a layer that starts off-screen and slides in on hover */
 .ctaButton::before {
   content: '';
   position: absolute;
@@ -103,20 +80,10 @@
   width: 100%;
   height: 100%;
   background: #00aaff;
-  
-  /* Start off-screen to the left */
   transform: translateX(-100%);
-  
-  /* Z-index places it BEHIND the button's text */
   z-index: -1; 
-  
-  transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); /* Smoother easing */
+  transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
 }
-
-
-/* ==========================================================================
-   Interactive States (Hover & Active/Click)
-   ========================================================================== */
 
 .ctaButton:hover {
   color: #0a0e1c; 

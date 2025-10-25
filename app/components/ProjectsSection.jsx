@@ -61,58 +61,76 @@ const projects = [
 ];
 
 
-// The component now accepts the `onProjectClick` function as a prop
 export default function ProjectsSection({ onProjectClick }) {
   const sectionRef = useRef(null);
-  const wrapperRef = useRef(null); // A ref for the horizontal wrapper
+  const wrapperRef = useRef(null);
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
-      gsap.matchMedia().add({
-        isDesktop: "(min-width: 769px)",
-        isMobile: "(max-width: 768px)",
-      }, (context) => {
-        let { isDesktop, isMobile } = context.conditions;
+    // This is the main GSAP context for cleanup
+    let ctx; 
 
-        if (isDesktop) {
-          const horizontalWrapper = wrapperRef.current;
-          if (!horizontalWrapper) return;
-          const horizontalScrollLength = horizontalWrapper.offsetWidth - window.innerWidth;
+    // We use an async function to be able to `await` the fonts
+    const initializeGSAP = async () => {
+      // ** THE CRITICAL FIX **
+      // Wait for all fonts in the document to be loaded and ready
+      await document.fonts.ready;
 
-          gsap.to(horizontalWrapper, {
-            x: -horizontalScrollLength,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              pin: true,
-              scrub: 1,
-              start: 'top top',
-              end: () => `+=${horizontalScrollLength}`,
-              invalidateOnRefresh: true,
-            },
-          });
-        }
+      // Now that fonts are loaded, we can safely initialize GSAP
+      ctx = gsap.context(() => {
+        gsap.matchMedia().add({
+          isDesktop: "(min-width: 769px)",
+          isMobile: "(max-width: 768px)",
+        }, (context) => {
+          let { isDesktop, isMobile } = context.conditions;
 
-        if (isMobile) {
-          const projectPanels = gsap.utils.toArray(`.${styles.projectPlanet}, .${styles.introPlanet}`);
-          projectPanels.forEach(panel => {
-            gsap.from(panel, {
-              opacity: 0,
-              y: 50,
+          if (isDesktop) {
+            const horizontalWrapper = wrapperRef.current;
+            if (!horizontalWrapper) return;
+            
+            const horizontalScrollLength = horizontalWrapper.offsetWidth - window.innerWidth;
+
+            gsap.to(horizontalWrapper, {
+              x: -horizontalScrollLength,
+              ease: 'none',
               scrollTrigger: {
-                trigger: panel,
-                start: 'top 85%',
-                end: 'bottom 60%',
-                toggleActions: 'play none none reverse',
-              }
+                trigger: sectionRef.current,
+                pin: true,
+                scrub: 1,
+                start: 'top top',
+                end: () => `+=${horizontalScrollLength}`,
+                invalidateOnRefresh: true, // Still important for resizes!
+              },
             });
-          });
-        }
-      });
-    }, sectionRef);
+          }
 
-    return () => ctx.revert();
-  }, []);
+          if (isMobile) {
+            const projectPanels = gsap.utils.toArray(`.${styles.projectPlanet}, .${styles.introPlanet}`);
+            projectPanels.forEach(panel => {
+              gsap.from(panel, {
+                opacity: 0,
+                y: 50,
+                scrollTrigger: {
+                  trigger: panel,
+                  start: 'top 85%',
+                  end: 'bottom 60%',
+                  toggleActions: 'play none none reverse',
+                }
+              });
+            });
+          }
+        });
+      }, sectionRef);
+    };
+
+    initializeGSAP();
+
+    // The cleanup function
+    return () => {
+      // ctx might not be defined yet if the component unmounts before fonts load
+      // so we check before calling revert()
+      ctx && ctx.revert();
+    };
+  }, []); // Empty dependency array ensures this runs only once
  return (
     <section ref={sectionRef} className={styles.projectsContainer}>
       <div ref={wrapperRef} className={styles.projectsWrapper}>
