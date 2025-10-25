@@ -102,3 +102,22 @@
     height: 200px;
   }
 }
+
+.planetCanvasContainer {
+  /* Make the container larger to fit the bigger planet */
+  width: 400px;
+  height: 400px;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 20px rgba(0, 170, 255, 0.3)); 
+}
+
+
+/* --- UPDATE the MEDIA QUERY for mobile --- */
+@media (max-width: 768px) {
+
+  /* Update the planet container size for mobile */
+  .planetCanvasContainer {
+    width: 250px;
+    height: 250px;
+  }
+}

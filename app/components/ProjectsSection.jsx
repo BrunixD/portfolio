@@ -7,6 +7,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from '../styles/ProjectsSection.module.css';
+import ProjectPlanet3D from './ProjectPlanet3D';
 
 // Register the ScrollTrigger plugin with GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -18,34 +19,47 @@ const projects = [
   { 
     id: 'planet1', 
     name: 'E-Commerce Nebula', 
-    color: '#ff6b6b',
+    color: '#8aefff', // A reddish tint for a Mars-like planet
     imageUrl: '/project-ecommerce.jpg',
-    description: 'A full-featured e-commerce platform built with Next.js and Stripe, designed for high performance and a seamless user experience. Users can browse products, manage their cart, and complete secure checkouts.',
-    tech: ['Next.js', 'React', 'Stripe', 'PostgreSQL', 'Tailwind CSS', 'GSAP'],
-    githubUrl: 'https://github.com/your-username/your-repo',
-    liveUrl: 'https://your-live-site.com'
+    // Add the new texture URLs
+    surfaceTextureUrl: '/textures/Icy.png',
+    cloudsTextureUrl: '/textures/Clouds/Clouds1.png', // Can be the same for all or unique
+    // ... rest of the project data
+    description: 'A full-featured e-commerce platform...',
+    tech: ['Next.js', 'React', 'Stripe', 'PostgreSQL'],
+    githubUrl: 'https://github.com',
+    liveUrl: 'https://github.com'
   },
   { 
     id: 'planet2', 
     name: 'Data Viz Asteroid Belt', 
-    color: '#4ecdc4',
+    color: '#ff8a8a', // A bluish tint for an ice planet
     imageUrl: '/project-dataviz.jpg',
-    description: 'An interactive data visualization dashboard that tracks real-time metrics. Built with D3.js and React, it provides complex data in an intuitive and visually appealing format.',
-    tech: ['React', 'D3.js', 'Node.js', 'WebSocket'],
-    githubUrl: 'https://github.com/your-username/your-repo',
-    liveUrl: 'https://your-live-site.com'
+    // Add unique texture URLs
+    surfaceTextureUrl: '/textures/Martian.png',
+    cloudsTextureUrl: '/textures/Clouds/Clouds2.png',
+    // ... rest of the project data
+    description: 'An interactive data visualization dashboard...',
+    tech: ['React', 'D3.js', 'Node.js'],
+    githubUrl: 'https://github.com',
+    liveUrl: 'https://github.com'
   },
   { 
     id: 'planet3', 
     name: 'Social Media Galaxy', 
-    color: '#feca57',
+    color: '#ffdb8a', // A yellowish tint for a gas giant
     imageUrl: '/project-social.jpg',
-    description: 'A full-stack social media application where users can create profiles, make posts, and interact with other users. Features a robust backend with authentication and a real-time feed.',
-    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
-    githubUrl: 'https://github.com/your-username/your-repo',
-    liveUrl: 'https://your-live-site.com'
+    // Add unique texture URLs
+    surfaceTextureUrl: '/textures/Gaseous2.png',
+    cloudsTextureUrl: '/textures/Clouds/Clouds3.png', // A unique cloud texture
+    // ... rest of the project data
+    description: 'A full-stack social media application...',
+    tech: ['React', 'Node.js', 'MongoDB'],
+    githubUrl: 'https://github.com',
+    liveUrl: 'https://github.com'
   },
 ];
+
 
 // The component now accepts the `onProjectClick` function as a prop
 export default function ProjectsSection({ onProjectClick }) {
@@ -99,8 +113,7 @@ export default function ProjectsSection({ onProjectClick }) {
 
     return () => ctx.revert();
   }, []);
-
-  return (
+ return (
     <section ref={sectionRef} className={styles.projectsContainer}>
       <div ref={wrapperRef} className={styles.projectsWrapper}>
         <div className={styles.introPlanet}>
@@ -108,11 +121,14 @@ export default function ProjectsSection({ onProjectClick }) {
           <p>Each project is a world I've helped build. Explore them.</p>
         </div>
         {projects.map((project) => (
-          // ** CLICK HANDLER **
-          // When this div is clicked, it calls the function passed down from the parent,
-          // sending its own project data up.
           <div key={project.id} className={styles.projectPlanet} onClick={() => onProjectClick(project)}>
-            <div className={styles.planetVisual} style={{ backgroundImage: `url(${project.imageUrl})` }}></div>
+            <div className={styles.planetCanvasContainer}>
+              <ProjectPlanet3D 
+                color={project.color} 
+                surfaceTextureUrl={project.surfaceTextureUrl}
+                cloudsTextureUrl={project.cloudsTextureUrl}
+              />
+            </div>
             <h2>{project.name}</h2>
             <p className={styles.ctaText}>Click to View Details</p>
           </div>
