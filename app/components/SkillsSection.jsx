@@ -92,8 +92,8 @@ export default function SkillsSection() {
   return (
     <section ref={sectionRef} id="skills" className={styles.skillsContainer}>
       <div className={styles.header}>
-        <h2 className={styles.sectionTitle}>Tech Arsenal</h2>
-        <p>The systems powering the starship and its missions.</p>
+        <h2 className={`holographic-title ${styles.sectionTitle}`}>Tech Arsenal</h2>
+        <p className="sub-title">The systems powering the starship and its missions.</p>
       </div>
       <div className={styles.grid}>
         {Object.values(skillsData).map((system) => (

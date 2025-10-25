@@ -123,8 +123,8 @@ export default function ProjectsSection({ onProjectClick }) {
     <section ref={sectionRef} className={styles.projectsContainer}>
       <div ref={wrapperRef} className={styles.projectsWrapper}>
         <div className={styles.introPlanet}>
-          <h2>My Work</h2>
-          <p>Each project is a world I've helped build. Explore them.</p>
+          <h2 className="holographic-title">My Work</h2>
+          <p className="sub-title">Each project is a world I've helped build. Explore them.</p>
         </div>
         {projects.map((project) => (
           <div key={project.id} className={styles.projectPlanet} onClick={() => onProjectClick(project)}>

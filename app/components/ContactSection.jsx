@@ -32,8 +32,8 @@ export default function ContactSection() {
   return (
     <section ref={sectionRef} id="contact" className={styles.contactContainer}>
       <div className={styles.header}>
-        <h2 className={`${styles.sectionTitle} ${styles.animateIn}`}>Open Comms Channel</h2>
-        <p className={styles.animateIn}>
+        <h2 className={`${styles.sectionTitle} ${styles.animateIn} holographic-title`}>Open Comms Channel</h2>
+        <p className={`${styles.animateIn} sub-title`}>
           Have a project, a question, or just want to discuss the latest in warp drive technology?
           <br />Send a transmission.
         </p>

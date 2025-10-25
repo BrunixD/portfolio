@@ -34,7 +34,7 @@ export default function AboutSection() {
   return (
     <section ref={sectionRef} id="about" className={styles.aboutContainer}>
       <div className={styles.logEntry}>
-        <h2 className={styles.logTitle}>Captain's Log, Stardate 2025</h2>
+        <h2 className={`holographic-title ${styles.logTitle}`}>Captain's Log, Stardate 2025</h2>
         <p>
           After years of navigating the vast cosmos of technology, I’ve charted my own course as a Fullstack Engineer with over 2.5 years of professional experience. My mission: to create intuitive, high-performing digital systems that feel as seamless as space travel itself.
         </p>
