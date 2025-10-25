@@ -52,11 +52,6 @@ export default function Header() {
         </div>
       </header>
 
-      {/* 
-        ** THE CRITICAL CHANGE **
-        The mobile navigation is now a sibling to the header, not a child.
-        This allows it to be a true full-screen overlay.
-      */}
       {isMenuOpen && (
         <nav className={styles.mobileNav} onClick={handleLinkClick}>
           <ul onClick={(e) => e.stopPropagation()}>
