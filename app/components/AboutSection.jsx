@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image'; // For optimized images
+import Image from 'next/image'; 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import styles from '../styles/AboutSection.module.css';
@@ -12,7 +12,6 @@ export default function AboutSection() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    // Animate all direct children of sectionRef when it enters the viewport
     const elementsToAnimate = sectionRef.current.children;
 
     gsap.fromTo(elementsToAnimate, 
@@ -45,7 +44,7 @@ export default function AboutSection() {
       </div>
       <div className={styles.crewIdCard}>
         <Image 
-          src="/profile-pic.jpg" // Add your professional photo here in the `public` folder
+          src="/profile-pic.jpg" 
           alt="Bruno Carvalho, Mission Commander"
           width={250}
           height={250}

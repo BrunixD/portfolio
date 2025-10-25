@@ -5,20 +5,16 @@ import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
-// The component now accepts the texture URLs as props
 function Planet({ color, surfaceTextureUrl, cloudsTextureUrl }) {
   const planetRef = useRef();
   const cloudsRef = useRef();
   const atmosphereRef = useRef();
 
-  // ** THE CRITICAL CHANGE **
-  // The useLoader hook now uses the dynamic props instead of hardcoded strings.
   const [surfaceTexture, cloudsTexture] = useLoader(THREE.TextureLoader, [
     surfaceTextureUrl,
     cloudsTextureUrl,
   ]);
 
-  // The animation loop (useFrame) remains exactly the same
   useFrame((state, delta) => {
     planetRef.current.rotation.y += delta * 0.05;
     cloudsRef.current.rotation.y += delta * 0.07;
@@ -35,7 +31,6 @@ function Planet({ color, surfaceTextureUrl, cloudsTextureUrl }) {
     );
   });
 
-  // The JSX for the spheres remains the same
   return (
     <group ref={planetRef}>
       <Sphere ref={atmosphereRef} args={[1.05, 64, 64]} scale={1.2}>
@@ -51,13 +46,11 @@ function Planet({ color, surfaceTextureUrl, cloudsTextureUrl }) {
   );
 }
 
-// The main component also needs to accept and pass down the props
 export default function ProjectPlanet3D({ color, surfaceTextureUrl, cloudsTextureUrl }) {
   return (
     <Canvas camera={{ position: [0, 0, 3], fov: 60 }}>
       <ambientLight intensity={0.5} />
       <directionalLight position={[3, 2, 3]} intensity={4} />
-      {/* Pass the props down to the inner Planet component */}
       <Planet 
         color={color} 
         surfaceTextureUrl={surfaceTextureUrl} 

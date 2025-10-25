@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import styles from '../styles/ProjectModal.module.css';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'; // For the links
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 export default function ProjectModal({ project, onClose }) {
   const modalRef = useRef(null);

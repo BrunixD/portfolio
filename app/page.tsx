@@ -1,8 +1,7 @@
-// app/page.js
-'use client'; // This page now needs to be a client component to manage state
+'use client';
 
-import { useState } from 'react'; // Import useState
-import { useLoading } from './context/LoadingContext'; // Import the hook
+import { useState } from 'react';
+import { useLoading } from './context/LoadingContext';
 import HeroBanner from './components/HeroBanner';
 import ProjectsSection from './components/ProjectsSection';
 import AboutSection from './components/AboutSection';
@@ -13,7 +12,7 @@ import styles from './styles/Home.module.css';
 import Preloader from './components/Preloader';
 
 export default function Home() {
- const { loading } = useLoading(); // Get the global loading state
+ const { loading } = useLoading(); 
   const [selectedProject, setSelectedProject] = useState(null);
 
   // Function to open the modal
@@ -28,10 +27,8 @@ export default function Home() {
 
  return (
     <>
-      {/* The preloader's visibility is now controlled by the global context */}
       <Preloader />
 
-      {/* The main content is always in the DOM but hidden by CSS until loading is complete */}
       <div className={`${styles.mainContent} ${loading ? styles.hidden : ''}`}>
         <HeroBanner />
         <div id="projects">

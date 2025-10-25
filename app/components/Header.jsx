@@ -32,7 +32,6 @@ export default function Header() {
   };
 
   return (
-    // Use a React Fragment to return multiple root elements
     <>
       <header ref={headerRef} className={styles.header}>
         <div className={styles.logo}>

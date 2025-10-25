@@ -1,9 +1,7 @@
 'use client';
 
-// Import React hooks. useLayoutEffect is key for animations that measure the DOM.
 import { useLayoutEffect, useRef } from 'react';
 
-// Import GSAP and its plugins
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from '../styles/ProjectsSection.module.css';
@@ -12,18 +10,14 @@ import ProjectPlanet3D from './ProjectPlanet3D';
 // Register the ScrollTrigger plugin with GSAP
 gsap.registerPlugin(ScrollTrigger);
 
-// ** DETAILED PROJECT DATA **
-// This array now contains all the information needed for the modal.
-// Remember to create these image files in your `/public` folder.
 const projects = [
   { 
     id: 'planet1', 
     name: 'E-Commerce Nebula', 
-    color: '#8aefff', // A reddish tint for a Mars-like planet
+    color: '#8aefff',
     imageUrl: '/project-ecommerce.jpg',
-    // Add the new texture URLs
     surfaceTextureUrl: '/textures/Icy.png',
-    cloudsTextureUrl: '/textures/Clouds/Clouds1.png', // Can be the same for all or unique
+    cloudsTextureUrl: '/textures/Clouds/Clouds1.png', 
     // ... rest of the project data
     description: 'A full-featured e-commerce platform...',
     tech: ['Next.js', 'React', 'Stripe', 'PostgreSQL'],
@@ -33,9 +27,8 @@ const projects = [
   { 
     id: 'planet2', 
     name: 'Data Viz Asteroid Belt', 
-    color: '#ff8a8a', // A bluish tint for an ice planet
+    color: '#ff8a8a',
     imageUrl: '/project-dataviz.jpg',
-    // Add unique texture URLs
     surfaceTextureUrl: '/textures/Martian.png',
     cloudsTextureUrl: '/textures/Clouds/Clouds2.png',
     // ... rest of the project data
@@ -47,11 +40,10 @@ const projects = [
   { 
     id: 'planet3', 
     name: 'Social Media Galaxy', 
-    color: '#ffdb8a', // A yellowish tint for a gas giant
+    color: '#ffdb8a',
     imageUrl: '/project-social.jpg',
-    // Add unique texture URLs
     surfaceTextureUrl: '/textures/Gaseous2.png',
-    cloudsTextureUrl: '/textures/Clouds/Clouds3.png', // A unique cloud texture
+    cloudsTextureUrl: '/textures/Clouds/Clouds3.png',
     // ... rest of the project data
     description: 'A full-stack social media application...',
     tech: ['React', 'Node.js', 'MongoDB'],
@@ -71,7 +63,6 @@ export default function ProjectsSection({ onProjectClick }) {
 
     // We use an async function to be able to `await` the fonts
     const initializeGSAP = async () => {
-      // ** THE CRITICAL FIX **
       // Wait for all fonts in the document to be loaded and ready
       await document.fonts.ready;
 
@@ -98,7 +89,7 @@ export default function ProjectsSection({ onProjectClick }) {
                 scrub: 1,
                 start: 'top top',
                 end: () => `+=${horizontalScrollLength}`,
-                invalidateOnRefresh: true, // Still important for resizes!
+                invalidateOnRefresh: true,
               },
             });
           }
@@ -130,7 +121,7 @@ export default function ProjectsSection({ onProjectClick }) {
       // so we check before calling revert()
       ctx && ctx.revert();
     };
-  }, []); // Empty dependency array ensures this runs only once
+  }, []); 
  return (
     <section ref={sectionRef} className={styles.projectsContainer}>
       <div ref={wrapperRef} className={styles.projectsWrapper}>

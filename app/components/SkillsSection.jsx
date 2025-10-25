@@ -5,14 +5,11 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import styles from '../styles/SkillsSection.module.css';
 
-// Import your skill icons. A great library for this is `react-icons`.
-// To use it: `npm install react-icons`
 import { FaReact, FaNodeJs, FaDatabase, FaGitAlt } from 'react-icons/fa';
 import { SiJavascript, SiNextdotjs, SiPostgresql, SiCss3 } from 'react-icons/si';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Define your skills in a structured way
 const skillsData = {
   navigation: {
     title: 'Navigation (Frontend)',
@@ -41,7 +38,6 @@ const skillsData = {
     title: 'Command & Control (Tools)',
     skills: [
       { name: 'Git & GitHub', icon: <FaGitAlt /> },
-      // Add more tools like Docker, Webpack, etc.
     ],
   },
 };
@@ -56,7 +52,6 @@ export default function SkillsSection() {
       const skills = system.querySelectorAll(`.${styles.skillItem}`);
       const title = system.querySelector('h3');
 
-      // Create a timeline for each system so title and items animate together
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: system,
