@@ -1,0 +1,71 @@
+/* This is the main container. It holds its place in the normal document flow. */
+.projectsContainer {
+  position: relative;
+  background-color: #050810;
+  overflow: hidden;
+}
+
+/* On desktop, this wrapper is wider than the screen for horizontal scrolling */
+.projectsWrapper {
+  height: 100vh;
+  width: 400vw; /* 100vw for intro + 300vw for 3 projects */
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.introPlanet,
+.projectPlanet {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+.introPlanet h2 {
+    font-size: 4rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.planetVisual {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
+}
+
+/* --- RESPONSIVE STYLES for MOBILE --- */
+@media (max-width: 768px) {
+  /* On mobile, the container just takes up as much space as its content needs */
+  .projectsContainer {
+    height: auto;
+  }
+
+  /* The wrapper becomes a standard vertical flex container */
+  .projectsWrapper {
+    height: auto;
+    width: 100%; /* Full width of the parent */
+    flex-direction: column; /* Stack the items vertically */
+  }
+
+  /* Each project section takes up the full screen height for a nice "snap" feel */
+  .introPlanet,
+  .projectPlanet {
+    height: 100vh;
+    width: 100%; /* Full width */
+  }
+  
+  .introPlanet h2 {
+    font-size: 3rem; /* Adjust font size for smaller screens */
+  }
+
+  .planetVisual {
+    width: 200px; /* Make the planet smaller on mobile */
+    height: 200px;
+  }
+}

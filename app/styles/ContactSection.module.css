@@ -1,0 +1,70 @@
+.contactContainer {
+  padding: 6rem 2rem;
+  background-color: #0a0e1c;
+  color: white;
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  color: #00aaff;
+  margin-bottom: 1rem;
+}
+
+.contactForm {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #c0c0c0;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 1rem;
+  background: #10182c;
+  border: 1px solid #2a3a5e;
+  border-radius: 4px;
+  color: white;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #00aaff;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+}
+
+.submitButton {
+  background-color: transparent;
+  border: 2px solid #00aaff;
+  color: #00aaff;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 4px;
+}
+
+.submitButton:hover {
+  background-color: #00aaff;
+  color: #0a0e1c;
+}
