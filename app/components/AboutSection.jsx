@@ -25,7 +25,7 @@ export default function AboutSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 80%', // Start animation when the top of the section is 80% from the top of the viewport
-          toggleActions: 'play none none none', // Play the animation once
+          toggleActions: 'play none none none', // Play once
         }
       }
     );
