@@ -6,7 +6,8 @@ import styles from '../styles/HeroBanner.module.css';
 
 // Correct imports from the new scoped packages
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim"; // or loadFull, if you want more features
+import { loadSlim } from "@tsparticles/slim"; 
+import ThreeScene from './ThreeScene';
 
 export default function HeroBanner() {
   const [init, setInit] = useState(false);
@@ -86,7 +87,7 @@ export default function HeroBanner() {
   }), []);
   
   // Split the title into characters for the animation
-  const title = "Alex Doe".split("").map((char, index) => (
+  const title = "Bruno Carvalho".split("").map((char, index) => (
     <span key={index} className={styles.char}>{char === ' ' ? '\u00A0' : char}</span>
   ));
 
@@ -95,16 +96,16 @@ export default function HeroBanner() {
   }
 
   return (
-    <section ref={heroRef} className={styles.heroContainer}>
-      <Particles id="tsparticles" options={particlesOptions} />
+      <section className={styles.heroContainer}>
+      {/* The Three.js scene is now the background */}
+      <div className={styles.threeBackground}>
+        <ThreeScene />
+      </div>
       
-      {/* Ensure you have these images in your `public` folder */}
-      <div ref={layer1Ref} className={`${styles.parallaxLayer} ${styles.layer1}`}></div>
-      <div ref={layer2Ref} className={`${styles.parallaxLayer} ${styles.layer2}`}></div>
-      
+      {/* Your text content and button remain the same */}
       <div className={styles.heroContent}>
-        <h1 className={styles.holographicText}>{title}</h1>
-        <p>Creative Developer & Interstellar Navigator</p>
+        <h1 className={styles.holographicText}>Bruno Carvalho</h1>
+        <p className={styles.holographicSubText }>Fullstack Engineer & Interstellar Navigator</p>
         <a href="#projects" className={styles.ctaButton}>Begin Exploration</a>
       </div>
     </section>

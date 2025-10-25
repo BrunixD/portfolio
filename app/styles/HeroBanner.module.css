@@ -1,25 +1,29 @@
 .heroContainer {
   height: 100vh;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   color: white;
   text-align: center;
-  background-color: #0a0e1c; /* Add a solid background color as a fallback */
+  background-color: #0a0e1c; /* A solid background is important */
 }
 
-.parallaxLayer {
+/* This container will hold our 3D canvas */
+.threeBackground {
   position: absolute;
-  top: -5%; left: -5%; /* Slightly larger to hide edges during parallax */
-  width: 110%; height: 110%;
-  background-size: cover;
-  background-position: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Places it behind the content */
 }
 
+/* Ensure the text content is on top */
 .heroContent {
-  position: relative; /* Ensure content is above parallax layers */
-  z-index: 2;
+  position: relative;
+  z-index: 1;
 }
 
 
@@ -50,15 +54,81 @@
   /* Remove the glitch animation; we'll use a smoother GSAP one now */
 }
 
+.holographicSubText {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff, 0 0 40px #00aaff;
+  /* Remove the glitch animation; we'll use a smoother GSAP one now */
+}
+
 .holographicText .char {
   display: inline-block; /* Required for transform animations */
 }
 
+/* ==========================================================================
+   CTA Button Styles (Corrected)
+   ========================================================================== */
+
 .ctaButton {
-  /* ... your styles */
-  text-decoration: none; /* Good for links styled as buttons */
-  color: white;
-  padding: 1rem 2rem;
-  border: 1px solid #00aaff;
-  /* ... etc */
+  /* --- CRITICAL FIXES --- */
+  display: inline-block; /* Ensures the <a> tag behaves like a block, respecting overflow */
+  overflow: hidden;      /* This now works correctly, hiding the ::before element */
+
+  /* --- Base Styling & Typography --- */
+  background: transparent;
+  border: 2px solid #00aaff;
+  color: #00aaff;
+  padding: 1rem 2.5rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  
+  /* --- Setup for Animations --- */
+  position: relative; /* Crucial for the pseudo-element positioning */
+  transition: all 0.4s ease-in-out;
+}
+
+/* --- The "Energy Fill" Pseudo-Element --- */
+/* This is a layer that starts off-screen and slides in on hover */
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00aaff;
+  
+  /* Start off-screen to the left */
+  transform: translateX(-100%);
+  
+  /* Z-index places it BEHIND the button's text */
+  z-index: -1; 
+  
+  transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); /* Smoother easing */
+}
+
+
+/* ==========================================================================
+   Interactive States (Hover & Active/Click)
+   ========================================================================== */
+
+.ctaButton:hover {
+  color: #0a0e1c; 
+  box-shadow: 0 0 25px rgba(0, 170, 255, 0.8);
+  transform: translateY(-3px);
+}
+
+.ctaButton:hover::before {
+  transform: translateX(0);
+}
+
+.ctaButton:active {
+  transform: translateY(0); 
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.8);
 }
