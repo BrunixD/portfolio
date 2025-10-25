@@ -7,10 +7,10 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.socialLinks}>
-        <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <a href="https://github.com/BrunixD" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <FaGithub />
         </a>
-        <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/bruno-carvalho-01a419205/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <FaLinkedin />
         </a>
         {/* Add other social links as needed */}
